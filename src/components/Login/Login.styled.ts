@@ -17,7 +17,7 @@ export const LoginBackground = styled.div`
 
 export const LoginBlock = styled.div<{ $hasError?: boolean }>`
   width: 360px;
-  height: ${({ $hasError }) => ($hasError ? '465px' : '425px')};
+  min-height: ${({ $hasError }) => ($hasError ? '465px' : '425px')};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,7 +33,7 @@ export const ErrorMessage = styled.p`
   color: red;
   font-size: 14px;
   text-align: center;
-  margin: -20px 0 10px 0;
+  margin: 10px 0;
 `;
 
 export const LoginLogo = styled.img`

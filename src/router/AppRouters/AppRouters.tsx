@@ -8,6 +8,7 @@ import PopExitPage from '../../pages/PopExitPage/PopExitPage';
 import { AuthContext } from '../../context/AuthContext';
 import PrivateRoute from '@/components/PrivateRoute/PrivateRoute';
 import ProfilePage from '@/pages/Profile/Profile';
+import CoursePage from '@/pages/CoursePage/CoursePage';
 
 const AppRouters = () => {
   const { loading } = useContext(AuthContext);
@@ -22,6 +23,8 @@ const AppRouters = () => {
         <Route path='login' element={<LoginPage />} />
         <Route path='register' element={<SignInPage />} />
       </Route>
+
+      <Route path='/course/:id' element={<CoursePage />} />
 
       {/* Приватные маршруты */}
       <Route element={<PrivateRoute />}>

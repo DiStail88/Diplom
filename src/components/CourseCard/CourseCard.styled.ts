@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-
 export const Card = styled.div<{ $showProgress?: boolean }>`
   position: relative;
   width: 360px;
@@ -136,28 +135,66 @@ export const CardButton = styled.button`
   }
 `;
 
-// CourseCard.styled.ts (добавляем в конец файла)
 export const ProgressBarContainer = styled.div`
-  width: 100%;
-  height: 16px;
-  background: #f1f1f1;
-  border-radius: 8px;
-  margin-top: 10px;
+  padding-top: 6px;
+  width: 300px;
+  background: rgba(247, 247, 247, 1);
+  border-radius: 50px;
+  overflow: hidden;
   position: relative;
-
-  span {
-    position: absolute;
-    right: 8px;
-    top: -4px;
-    font-size: 12px;
-    color: #000;
-  }
+  margin: 12px 0 0 0;
 `;
 
 export const ProgressBarFill = styled.div<{ width: number }>`
-  width: ${({ width }) => width}%;
+  width: ${({ width }) => Math.min(Math.max(width, 0), 100)}%;
   height: 100%;
-  background: #00c1ff;
-  border-radius: 8px;
-  transition: width 0.3s ease;
+  background: rgba(0, 193, 255, 1);
+  border-radius: 50px;
+  transition: width 0.6s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
+
+export const ProgressButton = styled.button`
+  margin-top: 40px;
+  /* Frame 2043683033 */
+  width: 300px;
+  height: 52px;
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 26px 16px 26px;
+
+  border-radius: 46px;
+  background: rgba(188, 236, 48, 1);
+
+  color: rgba(0, 0, 0, 1);
+
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 21px;
+  letter-spacing: 0px;
+  text-align: left;
+  border: none;
+`;
+
+export const ProgressHead = styled.p`
+  padding-top: 10px;
+  padding-bottom: 10px;
+  /* Прогресс 40% */
+  width: 118px;
+  height: 20px;
+  color: rgba(0, 0, 0, 1);
+
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 21px;
+  letter-spacing: 0px;
+  text-align: left;
 `;

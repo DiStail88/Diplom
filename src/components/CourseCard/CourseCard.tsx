@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Card,
   CardImage,
@@ -12,6 +13,8 @@ import {
   CardButton,
   ProgressBarContainer,
   ProgressBarFill,
+  ProgressButton,
+  ProgressHead,
 } from './CourseCard.styled';
 
 interface WorkoutProgress {
@@ -114,9 +117,17 @@ const CourseCard: React.FC<CourseCardProps> = ({
     fetchProgress();
   }, [course._id, showProgress]);
 
+  const getProgressButtonText = () => {
+    if (progress === 0) return 'Начать тренировку';
+    if (progress === 100) return 'Начать заново';
+    return 'Продолжить';
+  };
+
   return (
     <Card $showProgress={showProgress}>
-      <CardImage src={getCourseImage(course.nameEN)} alt={course.nameRU} />
+      <Link to={`/course/${course._id}`}>
+        <CardImage src={getCourseImage(course.nameEN)} alt={course.nameRU} />
+      </Link>
       {onToggleCourse && (
         <CardButton onClick={() => onToggleCourse(course._id)}>
           <img
@@ -245,10 +256,13 @@ const CourseCard: React.FC<CourseCardProps> = ({
             {capitalize(course.difficulty)}
           </CardComplexity>
           {showProgress && (
-            <ProgressBarContainer>
-              <ProgressBarFill width={progress} />
-              <span>{progress}%</span>
-            </ProgressBarContainer>
+            <>
+              <ProgressHead>Прогресс {progress}%</ProgressHead>
+              <ProgressBarContainer>
+                <ProgressBarFill width={progress} />
+              </ProgressBarContainer>
+              <ProgressButton>{getProgressButtonText()}</ProgressButton>
+            </>
           )}
         </CardDescription>
       </CardInfo>

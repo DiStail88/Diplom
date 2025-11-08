@@ -82,7 +82,7 @@ export const ProfileInfo = styled.div`
   text-align: left;
 `;
 
-export const ProfileButtonLogout = styled.div`
+export const ProfileButtonLogout = styled.button`
   /* Frame 2043683036 */
   width: 192px;
   height: 52px;
@@ -97,6 +97,7 @@ export const ProfileButtonLogout = styled.div`
   box-sizing: border-box;
   border: 1px solid rgba(0, 0, 0, 1);
   border-radius: 46px;
+  background: rgba(255, 255, 255, 1);
 `;
 
 export const ProfileBlockUserInfo = styled.div`
@@ -135,7 +136,7 @@ export const ProfileCoursesBlock = styled.div`
   gap: 40;
 `;
 
-export const ProfileCoursesHead = styled.div`
+export const ProfileCoursesHead = styled.h2`
   /* Мои курсы */
   width: 810px;
   height: 44px;
@@ -156,7 +157,6 @@ export const ProfileCoursesList = styled.div`
   flex-wrap: wrap;
   gap: 30px;
 `;
-
 
 // export const ProfileCoursesHead = styled.div`
 // `;
