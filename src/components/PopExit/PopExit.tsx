@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom'; 
 import {
   PopExitWrapper,
   PopExitBlock,
@@ -17,10 +17,15 @@ interface PopExitProps {
 const PopExit = ({ onClose }: PopExitProps) => {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const goToProfile = () => {
     onClose();
-    navigate('/profile');
+    if (location.pathname === '/profile') {
+      navigate('/');
+    } else {
+      navigate('/profile');
+    }
   };
 
   const handleLogout = () => {
@@ -39,7 +44,7 @@ const PopExit = ({ onClose }: PopExitProps) => {
         <PopExitUserName>{user?.email}</PopExitUserName>
         <PopExitButtonBlock>
           <PopExitButtonProfile onClick={goToProfile}>
-            Мой профиль
+            {location.pathname === '/profile' ? 'На главную' : 'Мой профиль'}
           </PopExitButtonProfile>
           <PopExitButtonLogout onClick={handleLogout}>
             Выйти

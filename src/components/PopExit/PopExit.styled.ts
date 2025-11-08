@@ -1,9 +1,6 @@
 import styled from 'styled-components';
 
 export const PopExitWrapper = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100vw;
   height: 100vh;
   z-index: 9999;
@@ -13,6 +10,9 @@ export const PopExitWrapper = styled.div`
 `;
 
 export const PopExitBlock = styled.div`
+  position: absolute;
+  top: 120px; /* Отступ от кнопки */
+  right: 0px;
   /* Frame 2043683044 */
   width: 266px;
   height: 258px;
@@ -78,6 +78,7 @@ export const PopExitButtonProfile = styled.button`
   line-height: 21px;
   letter-spacing: 0px;
   text-align: left;
+  border: none;
 `;
 
 export const PopExitButtonLogout = styled.button`

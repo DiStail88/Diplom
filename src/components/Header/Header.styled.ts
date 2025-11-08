@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const HeaderBackground = styled.div`
+  position: relative;
   width: 100%;
   height: 120px;
   display: flex;
@@ -18,8 +19,9 @@ export const HeaderLogo = styled.div`
   }
 
   img {
-    width: 100%;
-    height: auto;
+    /* logo */
+    width: 220px;
+    height: 35px;
     display: block;
   }
 `;
@@ -61,6 +63,8 @@ export const HeaderButton = styled.button`
 `;
 
 export const HeaderAuthBlock = styled.div`
+  position: absolute;
+  right: 0;
   height: 50px;
   display: flex;
   align-items: center;

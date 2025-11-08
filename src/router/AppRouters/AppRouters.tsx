@@ -4,8 +4,10 @@ import HomePage from '../../pages/HomePage/HomePage';
 import LoginPage from '../../pages/LoginPage/LoginPage';
 import SignInPage from '../../pages/SignInPage/SignInPage';
 import PopExitPage from '../../pages/PopExitPage/PopExitPage';
+
 import { AuthContext } from '../../context/AuthContext';
 import PrivateRoute from '@/components/PrivateRoute/PrivateRoute';
+import ProfilePage from '@/pages/Profile/Profile';
 
 const AppRouters = () => {
   const { loading } = useContext(AuthContext);
@@ -16,14 +18,15 @@ const AppRouters = () => {
     <Routes>
       {/* Публичные маршруты */}
       <Route path='/' element={<HomePage />}>
-        <Route path='/login' element={<LoginPage />} />
-        <Route path='/register' element={<SignInPage />} />
+        {/* 🔹 Модальные окна поверх главной */}
+        <Route path='login' element={<LoginPage />} />
+        <Route path='register' element={<SignInPage />} />
       </Route>
 
       {/* Приватные маршруты */}
       <Route element={<PrivateRoute />}>
+        <Route path='/profile' element={<ProfilePage />} />
         <Route path='/popexit' element={<PopExitPage />} />
-        {/* Другие приватные страницы */}
       </Route>
 
       {/* 404 */}

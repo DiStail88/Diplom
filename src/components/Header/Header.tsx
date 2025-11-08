@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   HeaderBackground,
   HeaderLogo,
@@ -11,13 +11,17 @@ import {
   HeaderUserLogo,
 } from './Header.styled';
 import { AuthContext } from '../../context/AuthContext';
-import PopExit from '../PopExit/PopExit'; // компонент попапа
+import PopExit from '../PopExit/PopExit';
 
 const Header = () => {
   const { isAuth, user, loading } = useContext(AuthContext);
   const [showPopExit, setShowPopExit] = useState(false);
+  const location = useLocation(); // ✅ получаем текущий путь
 
   if (loading) return <div>Загрузка...</div>;
+
+  // Проверяем, находимся ли мы на странице профиля
+  const isProfilePage = location.pathname === '/profile';
 
   return (
     <>
@@ -26,7 +30,11 @@ const Header = () => {
           <Link to='/'>
             <img src='/Home/headerlogo.png' alt='logo' />
           </Link>
-          <HeaderParag>Онлайн-тренировки для занятий дома</HeaderParag>
+
+          {/* 🔹 Отображаем надпись только если не страница профиля */}
+          {!isProfilePage && (
+            <HeaderParag>Онлайн-тренировки для занятий дома</HeaderParag>
+          )}
         </HeaderLogo>
 
         {!isAuth ? (
@@ -65,10 +73,10 @@ const Header = () => {
             </HeaderUserButton>
           </HeaderAuthBlock>
         )}
-      </HeaderBackground>
 
-      {/* Модальное окно PopExit */}
-      {showPopExit && <PopExit onClose={() => setShowPopExit(false)} />}
+        {/* Модальное окно PopExit */}
+        {showPopExit && <PopExit onClose={() => setShowPopExit(false)} />}
+      </HeaderBackground>
     </>
   );
 };
