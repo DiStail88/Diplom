@@ -147,7 +147,7 @@ export const WorkoutBlockProgressExercises = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  gap: 20px;
+  gap: 60px;
   flex-wrap: wrap;
 `;
 
