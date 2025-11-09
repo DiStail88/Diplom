@@ -9,6 +9,9 @@ import { AuthContext } from '../../context/AuthContext';
 import PrivateRoute from '@/components/PrivateRoute/PrivateRoute';
 import ProfilePage from '@/pages/Profile/Profile';
 import CoursePage from '@/pages/CoursePage/CoursePage';
+import ChoiseWorkoutPage from '@/pages/ChoiseWorkoutPage/ChoiseWorkoutPage';
+import WorkoutPage from '@/pages/WorkoutPage/WorkoutPage';
+import UserProgressPage from '@/pages/UserProgress/UserProgressPage';
 
 const AppRouters = () => {
   const { loading } = useContext(AuthContext);
@@ -28,7 +31,31 @@ const AppRouters = () => {
 
       {/* Приватные маршруты */}
       <Route element={<PrivateRoute />}>
-        <Route path='/profile' element={<ProfilePage />} />
+        <Route path='/profile' element={<ProfilePage />}>
+          <Route
+            path='course/:courseId/choise-workout'
+            element={<ChoiseWorkoutPage />}
+          />
+        </Route>
+
+        {/* Модальное окно выбора тренировки */}
+        <Route
+          path='/course/:courseId/choise-workout'
+          element={<ChoiseWorkoutPage />}
+        />
+
+        {/* Страница тренировки */}
+        <Route
+          path='/course/:courseId/workout/:workoutId'
+          element={<WorkoutPage />}
+        />
+
+        {/* Модалка прогресса */}
+        <Route
+          path='/course/:courseId/workout/:workoutId/progress'
+          element={<UserProgressPage />}
+        />
+
         <Route path='/popexit' element={<PopExitPage />} />
       </Route>
 

@@ -16,12 +16,18 @@ import PopExit from '../PopExit/PopExit';
 const Header = () => {
   const { isAuth, user, loading } = useContext(AuthContext);
   const [showPopExit, setShowPopExit] = useState(false);
-  const location = useLocation(); // ✅ получаем текущий путь
+  const location = useLocation();
 
   if (loading) return <div>Загрузка...</div>;
 
-  // Проверяем, находимся ли мы на странице профиля
+  // Проверяем, находимся ли мы на странице профиля или тренировки
   const isProfilePage = location.pathname === '/profile';
+  const isWorkoutPage = /^\/course\/[^/]+\/workout\/[^/]+/.test(
+    location.pathname
+  );
+
+  // 👇 скрываем надпись на профиле и странице тренировки
+  const hideTagline = isProfilePage || isWorkoutPage;
 
   return (
     <>
@@ -31,8 +37,7 @@ const Header = () => {
             <img src='/Home/headerlogo.png' alt='logo' />
           </Link>
 
-          {/* 🔹 Отображаем надпись только если не страница профиля */}
-          {!isProfilePage && (
+          {!hideTagline && (
             <HeaderParag>Онлайн-тренировки для занятий дома</HeaderParag>
           )}
         </HeaderLogo>

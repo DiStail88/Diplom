@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   Card,
   CardImage,
@@ -16,6 +16,12 @@ import {
   ProgressButton,
   ProgressHead,
 } from './CourseCard.styled';
+
+interface Workout {
+  _id: string;
+  name: string;
+  exercises: { name: string; quantity: number; _id: string }[];
+}
 
 interface WorkoutProgress {
   workoutId: string;
@@ -62,55 +68,62 @@ const CourseCard: React.FC<CourseCardProps> = ({
     }
   };
 
+  
+
   const capitalize = (str?: string) =>
     str ? str[0].toUpperCase() + str.slice(1).toLowerCase() : '';
 
   useEffect(() => {
     if (!showProgress) return;
-    const fetchProgress = async (token?: string) => {
+
+    const fetchProgress = async () => {
+      const token = localStorage.getItem('token') || '';
+
       try {
-        if (!token) {
-          token = localStorage.getItem('token') || '';
-        }
-
-        const res = await fetch(
-          `https://wedev-api.sky.pro/api/fitness/users/me/progress?courseId=${course._id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': '',
-            },
-          }
+        // 1. Получаем все тренировки курса
+        const workoutsRes = await fetch(
+          `https://wedev-api.sky.pro/api/fitness/courses/${course._id}/workouts`,
+          { headers: { Authorization: `Bearer ${token}` } }
         );
+        if (!workoutsRes.ok)
+          throw new Error('Не удалось получить тренировки курса');
+        const workoutsData: Workout[] = await workoutsRes.json(); // указываем тип
 
-        const text = await res.text();
+        // 2. Считаем общее количество упражнений
+        let totalExercises = 0;
+        workoutsData.forEach(w => {
+          totalExercises += w.exercises?.length || 0;
+        });
 
-        let data;
-        try {
-          data = JSON.parse(text);
-        } catch (err) {
-          console.error('Ответ не JSON, скорее всего HTML:', err);
-          return;
-        }
-
-        if (res.status === 401) {
-          console.error('Пользователь не авторизован');
+        if (totalExercises === 0) {
           setProgress(0);
           return;
         }
 
-        if (data.workoutsProgress?.length) {
-          const total = data.workoutsProgress.length;
-          const completed = data.workoutsProgress.filter(
-            (w: WorkoutProgress) => w.workoutCompleted
-          ).length;
-          setProgress(Math.round((completed / total) * 100));
-        } else {
-          console.log('Нет прогресса для этого курса');
-          setProgress(0);
-        }
+        // 3. Получаем прогресс пользователя
+        const progressRes = await fetch(
+          `https://wedev-api.sky.pro/api/fitness/users/me/progress?courseId=${course._id}`,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        if (!progressRes.ok)
+          throw new Error('Не удалось получить прогресс пользователя');
+        const progressData: { workoutsProgress: WorkoutProgress[] } =
+          await progressRes.json();
+
+        // 4. Считаем количество выполненных упражнений
+        let completedExercises = 0;
+        progressData.workoutsProgress?.forEach(w => {
+          w.progressData.forEach(p => {
+            if (p > 0) completedExercises += 1;
+          });
+        });
+
+        // 5. Вычисляем процент
+        const percent = Math.round((completedExercises / totalExercises) * 100);
+        setProgress(percent);
       } catch (err) {
         console.error('Ошибка загрузки прогресса:', err);
+        setProgress(0);
       }
     };
 
@@ -121,6 +134,12 @@ const CourseCard: React.FC<CourseCardProps> = ({
     if (progress === 0) return 'Начать тренировку';
     if (progress === 100) return 'Начать заново';
     return 'Продолжить';
+  };
+
+  const navigate = useNavigate();
+
+  const handleProgressClick = () => {
+    navigate(`/course/${course._id}/choise-workout`);
   };
 
   return (
@@ -261,7 +280,9 @@ const CourseCard: React.FC<CourseCardProps> = ({
               <ProgressBarContainer>
                 <ProgressBarFill width={progress} />
               </ProgressBarContainer>
-              <ProgressButton>{getProgressButtonText()}</ProgressButton>
+              <ProgressButton onClick={handleProgressClick}>
+                {getProgressButtonText()}
+              </ProgressButton>
             </>
           )}
         </CardDescription>
