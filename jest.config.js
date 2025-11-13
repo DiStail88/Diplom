@@ -1,16 +1,14 @@
 export default {
   testEnvironment: 'jsdom',
-  setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
-  moduleNameMapping: {
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.cjs'],
+  moduleNameMapper: {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
     '^@/(.*)$': '<rootDir>/src/$1',
   },
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest',
   },
-  collectCoverageFrom: [
-    'src/**/*.{ts,tsx}',
-    '!src/main.tsx',
-    '!src/vite-env.d.ts',
-  ],
+  testEnvironmentOptions: {
+    customExportConditions: [''],
+  },
 };

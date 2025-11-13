@@ -1,73 +1,75 @@
-# React + TypeScript + Vite
+# SkyFitness
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Платформа для онлайн-тренировок с персонализированным подбором курсов и отслеживанием прогресса.
 
-Currently, two official plugins are available:
+## О проекте
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+SkyFitness - это современное веб-приложение для занятий спортом дома. Пользователи могут выбирать курсы по различным направлениям (йога, фитнес, стретчинг и др.), отслеживать свой прогресс и управлять своими тренировками.
 
-## React Compiler
+### Основной функционал
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- ** Аутентификация** - регистрация и вход пользователей
+- ** Каталог курсов** - различные направления тренировок
+- ** Личный кабинет** - управление добавленными курсами
+- ** Трекинг прогресса** - отслеживание выполненных упражнений
+- ** Видео-тренировки** - встроенные видеоуроки
+- ** Адаптивный дизайн** - работа на всех устройствах
 
-## Expanding the ESLint configuration
+## Технологический стек
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Frontend
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **React** - пользовательский интерфейс
+- **TypeScript** - статическая типизация
+- **React Router** - навигация между страницами
+- **Styled Components** - стилизация компонентов
+- **Context API** - управление состоянием приложения
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Backend & Infrastructure
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **REST API** ([Sky.pro Fitness API](https://wedev-api.sky.pro/api/fitness)) - взаимодействие с сервером
+- **JWT** - аутентификация
+- **Cloudflare Pages** - хостинг и деплой
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🎮 Основные компоненты
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Header
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Навигация между страницами
+- Отображение статуса авторизации
+- Управление пользовательским меню
+
+### Main
+
+- Отображение всех доступных курсов
+- Поиск и фильтрация курсов
+- Добавление/удаление курсов в профиль
+
+### CourseCard
+
+- Информация о курсе (длительность, сложность)
+- Кнопка добавления в избранное
+- Прогресс выполнения (в профиле)
+
+### Authentication
+
+- Вход и регистрация пользователей
+- Валидация форм
+- Обработка ошибок
+
+# Клонирование репозитория
+
+git clone <https://github.com/DiStail88/Diplom.git>
+cd Diplom
+
+# Установка зависимостей
+
+npm install
+
+# Запуск в development режиме
+
+npm run dev
+
+# Запуск тестов
+
+npm test
