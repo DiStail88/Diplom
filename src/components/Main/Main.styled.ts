@@ -189,4 +189,10 @@ export const ButtonUp = styled.button`
   border-radius: 46px;
   background: rgba(188, 236, 48, 1);
   border: none;
+
+  transition: transform 0.6s ease;
+  &:hover {
+    background: rgba(195, 234, 166, 1);
+    transform: scale(1.05);
+  }
 `;

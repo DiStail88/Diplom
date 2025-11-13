@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../../api/authApi';
 import { AuthContext } from '../../context/AuthContext';
@@ -28,20 +28,30 @@ function Login() {
 
     try {
       const data = await loginUser(email, password);
-      // Ждем завершения login, чтобы user был установлен
       await login(data);
       navigate('/');
     } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError('Ошибка входа. Проверьте данные.');
-      }
+      if (err instanceof Error) setError(err.message);
+      else setError('Ошибка входа. Проверьте данные.');
     }
   };
 
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') navigate('/');
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [navigate]);
+
+
+  const handleBackgroundClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) navigate('/');
+  };
+
   return (
-    <LoginBackground>
+    <LoginBackground onClick={handleBackgroundClick}>
       <LoginBlock $hasError={!!error}>
         <LoginLogo src='/Login/Loginlogo.png' alt='Логотип' />
         <LoginForm onSubmit={handleSubmit}>

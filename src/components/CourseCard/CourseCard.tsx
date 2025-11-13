@@ -144,7 +144,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
   return (
     <Card $showProgress={showProgress}>
-      <Link to={`/course/${course._id}`}>
+      <Link to={`/course/${course._id}`} style={{height: "325px"}}>
         <CardImage src={getCourseImage(course.nameEN)} alt={course.nameRU} />
       </Link>
       {onToggleCourse && (

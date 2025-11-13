@@ -9,10 +9,17 @@ export const Card = styled.div<{ $showProgress?: boolean }>`
   justify-content: flex-start;
   align-items: center;
   gap: 24px;
-  padding: 0px 0px 15px 0px;
   border-radius: 30px;
   box-shadow: 0px 4px 67px -12px rgba(0, 0, 0, 0.13);
   background: rgba(255, 255, 255, 1);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05); /* Увеличение на 5% */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Усиление тени для лучшего эффекта */
+  }
 `;
 
 export const CardImage = styled.img`
@@ -64,9 +71,6 @@ export const CardDateTime = styled.div`
 `;
 
 export const CardDate = styled.div`
-  /* Frame 2043683020 */
-  width: 103px;
-  height: 38px;
   /* Auto layout */
   display: flex;
   flex-direction: row;
@@ -81,9 +85,6 @@ export const CardDate = styled.div`
 `;
 
 export const CardTime = styled.div`
-  /* Frame 2043683021 */
-  width: 163px;
-  height: 38px;
   /* Auto layout */
   display: flex;
   flex-direction: row;
@@ -98,9 +99,6 @@ export const CardTime = styled.div`
 `;
 
 export const CardComplexity = styled.div`
-  /* Frame 2043683020 */
-  width: 129px;
-  height: 38px;
   /* Auto layout */
   display: flex;
   flex-direction: row;
@@ -125,13 +123,22 @@ export const CardButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  transition:
+    transform 0.6s ease,
+    box-shadow 0.3s ease;
+
+  transform: scale(1) rotate(0deg);
+
+  &:hover {
+    transform: scale(1.2) rotate(180deg);
+  }
 
   &:focus {
     outline: none;
   }
 
   &:active {
-    transform: none;
+    transform: scale(1) rotate(0deg);
   }
 `;
 
@@ -181,6 +188,11 @@ export const ProgressButton = styled.button`
   letter-spacing: 0px;
   text-align: left;
   border: none;
+  transition: transform 0.6s ease;
+  &:hover {
+    background: rgba(195, 234, 166, 1);
+    transform: scale(1.05);
+  }
 `;
 
 export const ProgressHead = styled.p`

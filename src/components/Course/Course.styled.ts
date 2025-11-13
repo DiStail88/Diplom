@@ -256,6 +256,11 @@ export const CourseAppendButton = styled.button`
   letter-spacing: 0px;
   text-align: left;
   border: none;
+  transition: transform 0.6s ease;
+  &:hover {
+    background: rgba(195, 234, 166, 1);
+    transform: scale(1.05);
+  }
 `;
 
 export const CourseAppendImgBlock = styled.div``;

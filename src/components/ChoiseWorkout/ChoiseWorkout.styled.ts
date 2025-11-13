@@ -95,10 +95,15 @@ export const ChoiseWorkoutButton = styled.button`
   letter-spacing: 0px;
   text-align: left;
   border: none;
+  transition: transform 0.6s ease;
+  &:hover {
+    background: rgba(195, 234, 166, 1);
+    transform: scale(1.05);
+  }
 `;
 
 export const ChoiseWorkoutListBlock = styled.button`
-  all: unset; /* убираем дефолтные стили кнопки */
+  all: unset;
   width: 354px;
   height: 64px;
   display: flex;

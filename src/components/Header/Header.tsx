@@ -47,7 +47,7 @@ const Header = () => {
             <HeaderButton>Войти</HeaderButton>
           </Link>
         ) : (
-          <HeaderAuthBlock>
+          <HeaderAuthBlock onClick={() => setShowPopExit(prev => !prev)}>
             <HeaderUserLogo>
               <svg viewBox='0 0 50 50' width='50' height='50'>
                 <rect width='50' height='50' fill='none' />
@@ -61,7 +61,7 @@ const Header = () => {
 
             <HeaderUserName>{user?.email}</HeaderUserName>
 
-            <HeaderUserButton onClick={() => setShowPopExit(prev => !prev)}>
+            <HeaderUserButton>
               <svg
                 viewBox='0 0 12.7695 12.7695'
                 width='12.769531'
@@ -79,7 +79,6 @@ const Header = () => {
           </HeaderAuthBlock>
         )}
 
-        {/* Модальное окно PopExit */}
         {showPopExit && <PopExit onClose={() => setShowPopExit(false)} />}
       </HeaderBackground>
     </>

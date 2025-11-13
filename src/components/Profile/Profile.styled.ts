@@ -98,6 +98,11 @@ export const ProfileButtonLogout = styled.button`
   border: 1px solid rgba(0, 0, 0, 1);
   border-radius: 46px;
   background: rgba(255, 255, 255, 1);
+  transition: transform 0.6s ease;
+  &:hover {
+    background: rgba(247, 247, 247, 1);
+    transform: scale(1.05);
+  }
 `;
 
 export const ProfileBlockUserInfo = styled.div`

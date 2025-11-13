@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../../api/authApi';
 import {
@@ -21,6 +21,21 @@ function SignIn() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') navigate('/'); 
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [navigate]);
+
+  const handleBackgroundClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      navigate('/'); 
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -32,18 +47,15 @@ function SignIn() {
 
     try {
       await registerUser(email, password);
-      navigate('/login');
+      navigate('/login'); 
     } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError('Ошибка регистрации');
-      }
+      if (err instanceof Error) setError(err.message);
+      else setError('Ошибка регистрации');
     }
   };
 
   return (
-    <SignInBackground>
+    <SignInBackground onClick={handleBackgroundClick}>
       <SignInBlock $hasError={!!error}>
         <SignInLogo src='/Login/Loginlogo.png' alt='Логотип' />
 

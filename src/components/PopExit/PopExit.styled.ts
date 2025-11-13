@@ -79,6 +79,11 @@ export const PopExitButtonProfile = styled.button`
   letter-spacing: 0px;
   text-align: left;
   border: none;
+  transition: transform 0.6s ease;
+  &:hover {
+    background: rgba(195, 234, 166, 1);
+    transform: scale(1.05);
+  }
 `;
 
 export const PopExitButtonLogout = styled.button`
@@ -105,4 +110,10 @@ export const PopExitButtonLogout = styled.button`
   line-height: 21px;
   letter-spacing: 0px;
   text-align: left;
+
+  transition: transform 0.6s ease;
+  &:hover {
+    background: rgba(247, 247, 247, 1);
+    transform: scale(1.05);
+  }
 `;

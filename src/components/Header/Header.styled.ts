@@ -60,6 +60,13 @@ export const HeaderButton = styled.button`
   letter-spacing: 0px;
   text-align: center;
   border: none;
+
+  transition:
+    transform 0.6s ease;
+  &:hover {
+    background: rgba(195, 234, 166, 1);
+    transform: scale(1.05);
+  }
 `;
 
 export const HeaderAuthBlock = styled.div`
@@ -68,6 +75,7 @@ export const HeaderAuthBlock = styled.div`
   height: 50px;
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 
 export const HeaderUserName = styled.p`
